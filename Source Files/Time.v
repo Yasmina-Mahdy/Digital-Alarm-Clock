@@ -17,9 +17,9 @@ Up_Down_Mod_Counter #(5,24) h (.clk(clk), .rst(rst), .en(enh), .upDown(updown),.
 assign enm = adjust ?  ENTM : secs == 59;
 assign enh = adjust ?  ENTH : mins == 59 & secs == 59;
 
-assign H1 = hours \ 10;
+assign H1 = hours / 10;
 assign H2 = hours % 10;
-assign M1 = mins \ 10;
+assign M1 = mins / 10;
 assign M2 = mins % 10;
 
 if (adjust == 1) assign secs = 0;
