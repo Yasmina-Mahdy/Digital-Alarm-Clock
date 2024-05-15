@@ -21,6 +21,8 @@ assign H1 = hours / 10;
 assign H2 = hours % 10;
 assign M1 = mins / 10;
 assign M2 = mins % 10;
+assign S1 = mins / 10;
+assign S2 = mins % 10;
 
   // test correctness
 always @* begin
