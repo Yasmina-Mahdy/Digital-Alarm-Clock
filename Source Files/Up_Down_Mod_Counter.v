@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module Up_Down_Mod_Counter # (parameter x = 3, n = 6)(input clk, rst, en, upDown, [x-1:0] in, output [x-1:0] count);
+module Up_Down_Mod_Counter # (parameter x = 3, n = 6)(input clk, rst, en, upDown, output [x-1:0] count);
 reg [x-1:0] count;
 always @ (posedge clk, posedge rst)
 begin 
@@ -22,4 +22,4 @@ begin
      else
         count <= count;
 end 
-endmodule 
+endmodule
