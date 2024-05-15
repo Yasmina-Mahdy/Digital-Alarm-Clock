@@ -5,6 +5,7 @@ reg clk, rst, en, upDown, ld;
 reg [2:0] in;
 wire [2:0] count;
 Up_Down_Mod_Counter counter(.clk(clk),.rst(rst),.en(en),.upDown(upDown),.ld(ld), .in(in),.count(count));
+
 initial begin
     clk = 0;
     forever #10 clk = ~clk;
