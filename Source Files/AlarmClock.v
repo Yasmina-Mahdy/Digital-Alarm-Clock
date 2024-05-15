@@ -10,18 +10,21 @@ wire [3:0] TM2;
 wire clock_out,clock;
 wire [1:0]enable_anode;
 reg [2:0] state, nextstate;
-parameter [2:0] C=3'b000 , TH=3'b001, TM=3'b010, AH=3'b011, AM=3'b100;
+reg  [3:0]mux_out;
+parameter [2:0] N=3'b000 , TH=3'b001, TM=3'b010, AH=3'b011, AM=3'b100;
 reg en;
 ClockDivider #(5000000) cl( .clk(clk), .rst(rst), .en(1'b1), .clk_out(clk_out));
-ClockDivider #(250000) cl( .clk(clk), .rst(rst), .en(1'b1), .clk_out(clock));
+ClockDivider #(250000) c2( .clk(clk), .rst(rst), .en(1'b1), .clk_out(clock));
 Buttons pb( U, D, R, L, C, clk_out, rst,up, down, right, left, center);
-Time (clock, rst, 1'b0, ENTH, ENTM, updown,TH1,TH2,TM1, TM2);
+Time (clock, rst, en, ENTH, ENTM, updown,TH1,TH2,TM1, TM2);
 
 always @(state)begin
 case (state)
-C : if(center==0)
-nextstate <= C;
-default : nextstate <= C;
+N : begin
+nextstate <= N;
+en=1'b1;
+end
+default : nextstate <= N;
 endcase
 end
 
@@ -35,7 +38,14 @@ Binary_Counter #(2,4) count(clock, rst, 1'b1,enable_anode);
         3: mux_out = TH1;
      endcase
      end
+     
+     always @(posedge clock_out or posedge rst) begin
+     if(rst==1)
+     mux_out=0;
+     else
+     state<=nextstate;
+     end
 
-BCDto7SEG(1'b1,enable_anode,num,seg,anode);
+BCDto7SEG(1'b1,enable_anode,mux_out,seg,anode);
 
 endmodule
