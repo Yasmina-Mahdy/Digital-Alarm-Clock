@@ -36,9 +36,13 @@ always @(H1 or H2 or M1 or M2 or S1 or S2) begin
                         en[4] <=1'b1;
                             if(H1 == 2 && H2 == 3) 
                             begin
-                            ldh1 <= 1; ldh2 <= 1;
-                            inh1 <= 0; inh2 <= 0;
+                                ldh1 <= 1; ldh2 <= 1;
+                                inh1 <= 0; inh2 <= 0;
                             end 
+                            else
+                            begin
+                                ldh1 <= 0; ldh2 <= 0;
+                            end
                         end 
                         else en[4] <=1'b0; 
                     end
@@ -48,7 +52,9 @@ always @(H1 or H2 or M1 or M2 or S1 or S2) begin
             end
             else en[1] <= 1'b0;
         end 
-        else en <= 0;
+        else begin
+        en <= 0; ldh1 <= 0; ldh2 <= 0;
+        end
     
 end 
 endmodule
