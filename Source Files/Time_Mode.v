@@ -2,7 +2,7 @@
 
 module Time_Mode(input clk, rst, output [1:0] H1, [3:0] H2, [2:0] M1, [3:0] M2, [2:0] S1, [3:0] S2 );
 
-reg ldh1, ldh2;
+reg ld;
 reg [4:0] en;
 reg [1:0] inh1;
 reg [3:0] inh2;
@@ -13,8 +13,8 @@ Binary_Counter #(4,10) TS2 (.clk(clk), .rst(rst), .en(1'b1), .count(S2));
 Binary_Counter #(3,6) TS1 (.clk(clk), .rst(rst), .en(en[0]), .count(S1));
 Up_Down_Mod_Counter #(4,10) TM2 (.clk(clk), .rst(rst), .en(en[1]),.upDown(0),.ld(0), .in(0), .count(M2));
 Up_Down_Mod_Counter #(3,6) TM1 (.clk(clk), .rst(rst), .en(en[2]),.upDown(0),.ld(0), .in(0), .count(M1));
-Up_Down_Mod_Counter #(4,10) TH2 (.clk(clk), .rst(rst), .en(en[3]), .upDown(0),.ld(ldh2), .in(inh2), .count(H2));
-Up_Down_Mod_Counter #(2,3) TH1 (.clk(clk), .rst(rst), .en(en[4]),.upDown(0),.ld(ldh1), .in(inh1), .count(H1));
+Up_Down_Mod_Counter #(4,10) TH2 (.clk(clk), .rst(rst), .en(en[3]), .upDown(0),.ld(ld), .in(inh2), .count(H2));
+Up_Down_Mod_Counter #(2,3) TH1 (.clk(clk), .rst(rst), .en(en[4]),.upDown(0),.ld(ld), .in(inh1), .count(H1));
 
 // Time enables
 always @(H1 or H2 or M1 or M2 or S1 or S2) begin
@@ -36,12 +36,12 @@ always @(H1 or H2 or M1 or M2 or S1 or S2) begin
                         en[4] <=1'b1;
                             if(H1 == 2 && H2 == 3) 
                             begin
-                                ldh1 <= 1; ldh2 <= 1;
+                                ld <= 1;
                                 inh1 <= 0; inh2 <= 0;
                             end 
                             else
                             begin
-                                ldh1 <= 0; ldh2 <= 0;
+                                ld <= 0;
                             end
                         end 
                         else en[4] <=1'b0; 
@@ -53,7 +53,7 @@ always @(H1 or H2 or M1 or M2 or S1 or S2) begin
             else en[1] <= 1'b0;
         end 
         else begin
-        en <= 0; ldh1 <= 0; ldh2 <= 0;
+        en <= 0; ld <= 0;
         end
     
 end 
