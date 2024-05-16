@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module TimeMode (input clk, rst, adjust, ENTH, ENTM, updown, output [1:0] H1, [3:0] H2, [2:0] M1, [3:0] M2, [2:0] S1, [3:0] S2);
+module Time (input clk, rst, adjust, ENTH, ENTM, updown, output [1:0] H1, [3:0] H2, [2:0] M1, [3:0] M2, [2:0] S1, [3:0] S2);
 
 // different clks need to be input depending on the current state
 // updown set before depending on mode

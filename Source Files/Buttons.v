@@ -7,6 +7,6 @@ push_detector push_A(.in(U), .clk(clk), .reset(rst), .out(up));
 push_detector push_B(.in(D), .clk(clk), .reset(rst), .out(down));
 push_detector push_C(.in(R), .clk(clk), .reset(rst), .out(right));
 push_detector push_D(.in(L), .clk(clk), .reset(rst), .out(left));
-push_detector push_D(.in(C), .clk(clk), .reset(rst), .out(center));
+push_detector push_E(.in(C), .clk(clk), .reset(rst), .out(center));
 
 endmodule
