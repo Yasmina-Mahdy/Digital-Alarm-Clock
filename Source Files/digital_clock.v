@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
-module digital_clock(input clk, rst, adjust, ENTH, ENTM, ENAH, ENAM, ENS, U, D, 
-output [6:0] segments, output [3:0] anode_active,output up,down,adjust_out,ENTH_out, ENTM_out, ENAH_out,ENAM_out, ENS_out);
-//wire [1:0] en;
+module digital_clock(input clk, rst, adjust, ENTH, ENTM, ENAH, ENAM, ENS, up, down, 
+output [6:0] segments, output [3:0] anode_active, output up, down, adjust_out, ENTH_out, ENTM_out, ENAH_out, ENAM_out, ENS_out);
+//wire [1:0] en; 
 reg [3:0] num;
 wire clk_out,  clk_out_2, clk_in;
 wire[1:0] count;
@@ -22,16 +22,13 @@ assign ENS_out = ENS;
 ClockDivider #(50000)clkdiv (.clk(clk), .rst(rst), .en(1'b1),.clk_out(clk_out));
 ClockDivider #(250000) clock (.clk(clk), .rst(rst), .en(1'b1),.clk_out(clk_out_2));
 
-push_detector push_D(.in(D), .clk(clk_out_2), .reset(rst), .out(down));
-push_detector push_U(.in(U), .clk(clk_out_2), .reset(rst), .out(up));
-
 SevenSegDecWithEn seg(.en(count), .num(num), .segments(segments), .anode_active(anode_active)); 
 Binary_Counter #(2,4)BC(.clk(clk_out_2), .rst(rst), .en(1'b1), .count(count));
 // multiplex clk
 assign clk_in = adjust? clk_out_2: clk_out;
-Time t (clk_in, rst, adjust, ENTH, ENTM, ENS, up, down,  TH1, TH2, TM1, TM2);
+Time t(clk_in, rst, adjust, ENTH, ENTM, ENS, up, down, TH1, TH2, TM1, TM2);
 
-AlarmMode alarm( clk_out_2, rst, ENAH, ENAM, down, AH1, AH2, AM1, AM2);
+AlarmMode alarm(clk_out_2, rst, ENAH, ENAM, down, AH1, AH2, AM1, AM2);
 
 assign H1 = ENAH | ENAM ? AH1: TH1;
 assign H2 = ENAH | ENAM? AH2: TH2;
