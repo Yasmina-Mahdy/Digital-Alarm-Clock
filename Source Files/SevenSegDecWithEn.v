@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module SevenSegDecWithEn(
-        input [1:0]en, input [3:0] num, output reg [6:0] segments, output reg [3:0] anode_active); 
+        input [1:0]en, input [3:0] num, output reg [6:0] segments, output reg [3:0] anode_active, output reg DP); 
        always @* begin
        case(num)
             0: segments = 7'b0000001;
@@ -24,10 +24,22 @@ module SevenSegDecWithEn(
        end
        always @* begin
        case(en)
-       0: anode_active = 4'b1110;
-       1: anode_active = 4'b1101;
-       2: anode_active = 4'b1011;
-       3: anode_active = 4'b0111;
+       0: begin 
+       anode_active = 4'b1110;
+       DP = 0;
+       end 
+       1: begin
+       anode_active = 4'b1101;
+       DP = 0;
+       end
+       2: begin
+       anode_active = 4'b1011;
+       DP = 1;
+       end
+       3: begin
+       anode_active = 4'b0111;
+       DP = 0;
+       end
        endcase
        end
        

@@ -30,16 +30,18 @@ set_property IOSTANDARD LVCMOS33 [get_ports {segments[1]}]
 set_property PACKAGE_PIN U7 [get_ports {segments[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {segments[0]}]
 
-set_property PACKAGE_PIN P3 [get_ports ENTH_out]
-set_property IOSTANDARD LVCMOS33 [get_ports ENTH_out]
-set_property PACKAGE_PIN U3 [get_ports ENTM_out]
-set_property IOSTANDARD LVCMOS33 [get_ports ENTM_out]
-set_property PACKAGE_PIN W3 [get_ports ENAH_out]
-set_property IOSTANDARD LVCMOS33 [get_ports ENAH_out]
-set_property PACKAGE_PIN V3 [get_ports ENAM_out]
-set_property IOSTANDARD LVCMOS33 [get_ports ENAM_out]
-set_property PACKAGE_PIN V13 [get_ports ENS_out]
-set_property IOSTANDARD LVCMOS33 [get_ports ENS_out]
+
+
+set_property PACKAGE_PIN L1 [get_ports ENTH]
+set_property IOSTANDARD LVCMOS33 [get_ports ENTH]
+set_property PACKAGE_PIN P1 [get_ports ENTM]
+set_property IOSTANDARD LVCMOS33 [get_ports ENTM]
+set_property PACKAGE_PIN N3 [get_ports ENAH]
+set_property IOSTANDARD LVCMOS33 [get_ports ENAH]
+set_property PACKAGE_PIN P3 [get_ports ENAM]
+set_property IOSTANDARD LVCMOS33 [get_ports ENAM]
+set_property PACKAGE_PIN U16 [get_ports LD0]
+set_property IOSTANDARD LVCMOS33 [get_ports LD0]
 
 set_property PACKAGE_PIN W4 [get_ports {anode_active[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[3]}]
@@ -49,3 +51,11 @@ set_property PACKAGE_PIN U4 [get_ports {anode_active[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[1]}]
 set_property PACKAGE_PIN U2 [get_ports {anode_active[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[0]}]
+
+set_property PACKAGE_PIN V7 [get_ports blink]
+set_property IOSTANDARD LVCMOS33 [get_ports blink]
+
+set_property PACKAGE_PIN M18 [get_ports buzzy]
+set_property IOSTANDARD LVCMOS33 [get_ports buzzy]
+
+

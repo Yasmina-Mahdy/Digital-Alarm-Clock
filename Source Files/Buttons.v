@@ -10,6 +10,5 @@ push_detector push_R(.in(R), .clk(clk), .reset(rst), .out(right));
 push_detector push_L(.in(L), .clk(clk), .reset(rst), .out(left));
 push_detector push_E(.in(C), .clk(clk), .reset(rst), .out(center));
 
- ClockDivider #(5000) buzzy (clk, rst, en, clk_out); 
 
 endmodule
