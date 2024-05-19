@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module Time_Alarm(input sec_clock, funct_clk, rst, adjust, ENTH, ENTM, ENAH, ENAM, ENS, up, down,
-output [1:0] H1 ,output [3:0] H2, output [2:0] M1, output [3:0] M2,output Z);
+output [1:0] H1 ,output [3:0] H2, output [2:0] M1, output [3:0] M2,output Z, [5:0] secs);
 
     reg [3:0] num;
     wire clk_t;
@@ -15,7 +15,7 @@ output [1:0] H1 ,output [3:0] H2, output [2:0] M1, output [3:0] M2,output Z);
     // pick clock for time based on mode
     assign clk_t = adjust? funct_clk: sec_clock;
         
-    Time t(clk_t, rst, adjust, ENTH, ENTM, ENS, up, down, TH1, TH2, TM1, TM2);
+    Time t(clk_t, rst, adjust, ENTH, ENTM, ENS, up, down, TH1, TH2, TM1, TM2, secs);
     
     AlarmMode alarm(funct_clk, rst, ENAH, ENAM, up, down, AH1, AH2, AM1, AM2);
     

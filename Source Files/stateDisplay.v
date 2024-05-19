@@ -9,6 +9,7 @@ module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output
     wire [2:0] M1;
     wire [3:0] M2;
     wire [4:0] EN;
+    wire [5:0] secs;
     
     // adjust clock later
     ClockDivider #(50000000) clk_1 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(sec_clock));
@@ -16,7 +17,7 @@ module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output
     ClockDivider #(25000000) clk_3 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(blink_clk));
     
     Buttons fiveButtons(U, D, R, L, C, funct_clk, rst, up, down, right, left, center);
-    FSM fsm(funct_clk, rst,up, down, right, left, center, Z, adjust, EN, led);
+    FSM fsm(funct_clk, rst,up, down, right, left, center, Z, secs, adjust, EN, led);
     
     assign adjust_out = adjust;
     assign up_out = up;
@@ -30,7 +31,7 @@ module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output
     assign ENAH = EN[2];
     assign ENAM = EN[1];
     
-    Time_Alarm TA (sec_clock, funct_clk, rst, adjust, EN[4], EN[3], EN[2], EN[1], EN[0], up, down, H1, H2, M1, M2, Z);
+    Time_Alarm TA (sec_clock, funct_clk, rst, adjust, EN[4], EN[3], EN[2], EN[1], EN[0], up, down, H1, H2, M1, M2, Z, secs);
     digital_clock display (funct_clk, rst, H1, H2, M1, M2, segments, anode_active, DP);
     assign blink = ~(DP & sec_clock & ~adjust);
     
