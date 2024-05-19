@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] anode_active, output ENTH, ENTM, ENAH, ENAM, output buzzy, LD0, blink);
+module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] anode_active, output ENTH, ENTM, ENAH, ENAM, output buzzy, LD0, blink, stop);
     wire up, down, right, left, center, adjust, DP;
     wire sec_clock, funct_clk, blink_clk, adjust_out;
     wire up_out, down_out, right_out, left_out, center_out;
@@ -16,7 +16,7 @@ module stateDisplay(input U, D, R, L, C, clk, rst, output [6:0] segments, output
     ClockDivider #(25000000) clk_3 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(blink_clk));
     
     Buttons fiveButtons(U, D, R, L, C, funct_clk, rst, up, down, right, left, center);
-    FSM fsm(funct_clk, rst,up, down, right, left, center, Z, adjust, EN, led);
+    FSM fsm(funct_clk, rst,up, down, right, left, center, Z, adjust, EN, led, stop);
     
     assign adjust_out = adjust;
     assign up_out = up;

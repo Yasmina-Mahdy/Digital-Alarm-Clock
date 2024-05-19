@@ -43,6 +43,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports ENAM]
 set_property PACKAGE_PIN U16 [get_ports LD0]
 set_property IOSTANDARD LVCMOS33 [get_ports LD0]
 
+set_property PACKAGE_PIN E19 [get_ports stop]
+set_property IOSTANDARD LVCMOS33 [get_ports stop]
+
 set_property PACKAGE_PIN W4 [get_ports {anode_active[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[3]}]
 set_property PACKAGE_PIN V4 [get_ports {anode_active[2]}]
