@@ -21,7 +21,7 @@ You must have a running version of Vivado. This project was created using the 20
 9. Go to back to **Flow Manager** and under **Project Manager** select **Generate Bitstream.**
 10. Once the process is finished, press cancel then go back to **Project Manager** and under **Generate Bitstream** select **Open Hardware Manager**
 11. Select **Open Target** then **Auto connect**
-12. After a short wait period, go to **Hardware Manager** at the top and select **Program Device**.
+12. After a short wait period, go to te blue bar titled **Hardware Manager** at the top and select **Program Device**.
 13. The project is now successfully installed on the FPGA.
 14. For buzzer funcionality, connect an active piezzo buzzer to the bottom-right set of pins (JC) on the FPGA, with the shorter side (ground) to the pin 5 and the longer side to pin 2.
 
@@ -34,6 +34,10 @@ You must have a running version of Vivado. This project was created using the 20
 * Pressing the center button allows you to switch between the clock mode and the adjust mode.
 * Once the alarm goes off, you can press any of the up | down | right | left buttons to stop and the center button to snooze.
 * Once snoozed, the Alarm-Clock waits for 30 seconds before another alarm go off. If any buttons are pressed while in this state, the snooze is cancelled.
+
+## Collaborators
+* [Haya Shalaby](https://github.com/HayaShalaby)
+* [Rana Taher](https://github.com/rana5679)
 
 
   
