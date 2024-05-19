@@ -1,7 +1,7 @@
 # Digital-Alarm-Clock
 ## Overview
 This is project was created for the Digital Design I course, taught at the American University in Cairo in the Spring 2024 semester, under the instruction of Dr. Mohamed Shalan.  
-It is an implementation of a digital alarm clock on the Basys3 FPGA using Verilog HDL.
+It is an implementation of a digital alarm clock on the Basys3 FPGA using Verilog HDL, and is an application of our understanding of sequential circuits, finite state machines and other concepts learned in the course, as well as the applied skills gained through its lab.
 ## Features
 * The Alarm has two main modes of operation: Clock and Adjust
 * In the clock mode, the Alarm-Clock works as a normal HH:MM clock, with a blinker for the seconds.
