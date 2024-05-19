@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module Top (input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] anode_active, output ENTH, ENTM, ENAH, ENAM, output buzzy, LED, blink_DP);
-    wire up, down, right, left, center, adjust, DP;
+    wire up, down, right, left, center, adjust, DP, snooze_rst, snoozeEN, z_s;
     wire sec_clock, funct_clk, blink, adjust_out;
     wire up_out, down_out, right_out, left_out, center_out;
     wire [1:0] H1;
@@ -20,7 +20,7 @@ module Top (input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] a
     Buttons fiveButtons(U, D, R, L, C, funct_clk, rst, up, down, right, left, center);
     
     // Finite state machine that provides mode enables and alarm signal
-    stateLogic fsm(funct_clk,sec_clock, rst, up, down, right, left, center, Z, secs, adjust, EN, alarm_on,snoozeEN);
+    stateLogic fsm(funct_clk,sec_clock, rst, up, down, right, left, center, Z, z_s, secs, adjust, EN, alarm_on, snoozeEN, snooze_rst);
        
     // mode enables from FSM
     assign ENTH = EN[4];
@@ -29,7 +29,7 @@ module Top (input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] a
     assign ENAM = EN[1];
     
     // a module that combines the Time and Alarm modes, picks which set of values to send to display and computes the Z flag
-    Time_Alarm TA (sec_clock, funct_clk, rst, adjust, EN[4], EN[3], EN[2], EN[1], EN[0], up, down, H1, H2, M1, M2, Z, secs);
+    Time_Alarm TA (sec_clock, funct_clk, rst, adjust, EN[4], EN[3], EN[2], EN[1], EN[0], up, down, snooze_rst, snoozeEN, z_s, H1, H2, M1, M2, Z, secs);
     
     // a module that handles the 7 segment display
     Display D (funct_clk, rst, H1, H2, M1, M2, segments, anode_active, DP);
