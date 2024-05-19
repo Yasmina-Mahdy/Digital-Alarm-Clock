@@ -28,7 +28,7 @@ You must have a running version of Vivado. This project was created using the 20
 ![Image of pins](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4IlqUigt0jltnD6JjE16ZewN7i60rF8OfzQBc0YSpQ&s) 
 
 ## How to Use the Project
-* Once the FPGA is programmed, the Alarm-Clock goes to the adjust mode, specifically state of setting the hours of the clock. The left-most LED (LD15) is on during this state.
+* Once the FPGA is programmed, the Alarm-Clock goes to the adjust mode, specifically the state of setting the hours of the clock. The left-most LED (LD15) is on during this state.
 * Pressing the right buttons allows you to navigate between 4 states, namely, setting the hours of the clock, setting the minutes of the clock, setting the hours of the alarm and setting the minutes of the alarm in order, indicated by LEDs 15, 14, 13 & 12 respectively. The left buttons does the same but in the opposite direction.
 * Pressing the up button in any of the 4 states allows you to increment the value of the respective digit, while the down button decrements
 * Pressing the center button allows you to switch between the clock mode and the adjust mode.
@@ -39,6 +39,22 @@ You must have a running version of Vivado. This project was created using the 20
 * [Haya Shalaby](https://github.com/HayaShalaby)
 * [Rana Taher](https://github.com/rana5679)
 
+## License
+Copyright 2024 Yasmina Mahdy
+Copyright 2024 Haya Shalaby
+Copyright 2024 Rana Taher
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
   
  
