@@ -1,12 +1,16 @@
 `timescale 1ns / 1ps
 
-module stateLogic (input clk, rst, up, down, right, left, center, Z, [5:0] secs, output adjust, output reg [4:0] EN, output alarm_en);
+module stateLogic (input clk,clk_sec, rst, up, down, right, left, center, Z, [5:0] secs, output adjust, output reg [4:0] EN, output alarm_en, snoozeEN);
     //States Encoding 
-    parameter [2:0] TH = 3'b000, TM = 3'b001, AH = 3'b010, AM = 3'b011, Clock = 3'b100, Alarm = 3'b101;
+    parameter [2:0] TH = 3'b000, TM = 3'b001, AH = 3'b010, AM = 3'b011, Clock = 3'b100, Alarm = 3'b101, Snooze = 3'b110;
     reg [2:0] state, nextState; 
-    
+    wire snooze_rst;
+    wire z_s;
+    wire [4:0] count;
+    Up_Down_Mod_Counter #(5, 30) snooze_count (clk_sec, snooze_rst, snoozeEN, 1'b0, count);
+    assign z_s= (count == 29)? 1 : 0 ;
     // signal to detects stop signal
-    assign signal = up | down | left | right | center; 
+    assign signal = up | down | left | right; 
 // Next state logic    
     always @ * begin
         case(state)
@@ -42,8 +46,17 @@ module stateLogic (input clk, rst, up, down, right, left, center, Z, [5:0] secs,
                   end 
             Alarm: begin
                 if(signal) nextState = Clock;
+                else if(center) nextState=Snooze;
                 else nextState = Alarm;  
             end  
+            Snooze: begin
+                if(z_s) 
+                    nextState = Alarm;
+                else if(signal | center) 
+                    nextState = Clock;
+                else nextState = Snooze;
+            end
+            default : nextState = TH;
         endcase 
     end
     
@@ -58,7 +71,8 @@ module stateLogic (input clk, rst, up, down, right, left, center, Z, [5:0] secs,
 // output logic    
     assign adjust = (state == Clock || state == Alarm)? 0 : 1;
     assign alarm_en = (state == Alarm)? 1 : 0;
-    
+    assign snoozeEN = (state == Snooze)? 1:0; 
+    assign snooze_rst = (state == Snooze) ? 0: 1; 
     //EN is mode enables
     always @ * begin
         case(state)
