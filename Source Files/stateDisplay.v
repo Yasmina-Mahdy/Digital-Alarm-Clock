@@ -14,13 +14,13 @@ module Top (input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] a
     // Clocks to enable the modules
     ClockDivider #(50000000) clk_1 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(sec_clock));
     ClockDivider #(250000) clk_2 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(funct_clk));
-    ClockDivider #(15000000) clk_3 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(blink));
+    ClockDivider #(12000000) clk_3 (.clk(clk), .rst(rst), .en(1'b1),.clk_out(blink));
     
     // module that handles the push buttons
     Buttons fiveButtons(U, D, R, L, C, funct_clk, rst, up, down, right, left, center);
     
     // Finite state machine that provides mode enables and alarm signal
-    stateLogic fsm(funct_clk, rst, up, down, right, left, center, Z, secs, adjust, EN, alarm_on);
+    stateLogic fsm(funct_clk,sec_clock, rst, up, down, right, left, center, Z, secs, adjust, EN, alarm_on,snoozeEN);
        
     // mode enables from FSM
     assign ENTH = EN[4];
@@ -38,10 +38,10 @@ module Top (input U, D, R, L, C, clk, rst, output [6:0] segments, output [3:0] a
     assign blink_DP = ~(DP & sec_clock & ~adjust);
     
     // LD0 
-    assign LED = adjust? 1: alarm_on & blink;
+    assign LED = adjust? 1: alarm_on & blink & !snoozeEN;
     
     // buzzer
-    assign buzzy = alarm_on & blink;
+    assign buzzy = alarm_on & blink & !snoozeEN;
    
     
 endmodule
