@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 
-module FSM(input clk, rst, up, down, right, left, center, Z, [5:0] secs, output adjust, output reg [4:0] EN, output led);
+module FSM(input clk, rst, up, down, right, left, center, Z, output adjust, output reg [4:0] EN, output led);
     //States Encoding 
     parameter [2:0] TH = 3'b000, TM = 3'b001, AH = 3'b010, AM = 3'b011, Clock = 3'b100, Alarm = 3'b101;
     reg [2:0] state, nextState; 
-    
+    reg stop;
     
     assign signal = up | down | left | right | center; 
 // Next state logic    
@@ -36,10 +36,10 @@ module FSM(input clk, rst, up, down, right, left, center, Z, [5:0] secs, output 
                 end 
             Clock: begin
             // but if go from adjust to clock alarm doesn't go off
-                if(Z && secs == 0) nextState = Alarm;
+                if(Z & ~stop) nextState = Alarm;
                  else if(center) nextState = TH; 
-                  else nextState = Clock; 
-                  end 
+                 else nextState = Clock; 
+                 end 
             Alarm: begin
                 if(signal) nextState = Clock;
                 else nextState = Alarm;  
@@ -65,8 +65,14 @@ module FSM(input clk, rst, up, down, right, left, center, Z, [5:0] secs, output 
             TM: EN = 5'b01000;            
             AH: EN = 5'b00101; 
             AM: EN = 5'b00011;
-            Clock: EN = 5'b00001;
-            Alarm: EN = 5'b00001;
+            Clock: begin 
+            EN = 5'b00001;
+            if(~Z) stop = 0;
+            end
+            Alarm: begin
+            EN = 5'b00001;
+            if(signal) stop = 1; 
+            end
         endcase 
     end
 endmodule
