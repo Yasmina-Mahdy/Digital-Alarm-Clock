@@ -23,7 +23,7 @@ You must have a running version of Vivado. This project was created using the 20
 11. Select **Open Target** then **Auto connect**
 12. After a short wait period, go to **Hardware Manager** at the top and select **Program Device**.
 13. The project is now successfully installed on the FPGA.
-14. For buzzer funcionality, connect an active piezzo buzzer to the bottom-right set of pins (JC) on the FPGA, with the shorter side (ground) to the pin 2 and the longer side to pin 5.
+14. For buzzer funcionality, connect an active piezzo buzzer to the bottom-right set of pins (JC) on the FPGA, with the shorter side (ground) to the pin 5 and the longer side to pin 2.
 
 ![Image of pins](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4IlqUigt0jltnD6JjE16ZewN7i60rF8OfzQBc0YSpQ&s) 
 
