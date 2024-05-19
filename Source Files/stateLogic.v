@@ -1,14 +1,10 @@
 `timescale 1ns / 1ps
 
-module stateLogic (input clk,clk_sec, rst, up, down, right, left, center, Z, [5:0] secs, output adjust, output reg [4:0] EN, output alarm_en, snoozeEN);
+module stateLogic (input clk, clk_sec, rst, up, down, right, left, center, Z, z_s, [5:0] secs, output adjust, output reg [4:0] EN, output alarm_en, snoozeEN, snooze_rst);
     //States Encoding 
     parameter [2:0] TH = 3'b000, TM = 3'b001, AH = 3'b010, AM = 3'b011, Clock = 3'b100, Alarm = 3'b101, Snooze = 3'b110;
     reg [2:0] state, nextState; 
-    wire snooze_rst;
-    wire z_s;
-    wire [4:0] count;
-    Up_Down_Mod_Counter #(5, 30) snooze_count (clk_sec, snooze_rst, snoozeEN, 1'b0, count);
-    assign z_s= (count == 29)? 1 : 0 ;
+    
     // signal to detects stop signal
     assign signal = up | down | left | right; 
 // Next state logic    
