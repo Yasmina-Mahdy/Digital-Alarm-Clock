@@ -1,6 +1,6 @@
 # Digital-Alarm-Clock
 ## Overview
-This is a project that was created for the Digital Design I course, taught at the American University in Cairo in the Spring 2024 semester, under the instruction of Dr. Mohamed Shalan.
+This is a project that was created for the Digital Design I course, taught at the American University in Cairo in the Spring 2024 semester, under the instruction of Dr. Mohamed Shalan.  
 This project is an implementation of a digital alarm clock on the Basys3 FPGA using Verilog HDL.
 ## Features
 * The Alarm has two main modes of operation: Clock and Adjust
@@ -23,7 +23,7 @@ You must have a running version of Vivado. This project was created using the 20
 11. Select **Open Target** then **Auto connect**
 12. After a short wait period, go to te blue bar titled **Hardware Manager** at the top and select **Program Device**.
 13. The project is now successfully installed on the FPGA.
-14. For buzzer funcionality, connect an active piezzo buzzer to the bottom-right set of pins (JC) on the FPGA, with the shorter side (ground) to the pin 5 and the longer side to pin 2.
+14. For buzzer funcionality, connect an active piezzo buzzer to the bottom-right set of pins (JC) on the FPGA, with the shorter side (ground) to the pin 5 and the longer side to pin 2.  
 
 ![Image of pins](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4IlqUigt0jltnD6JjE16ZewN7i60rF8OfzQBc0YSpQ&s) 
 
@@ -40,9 +40,9 @@ You must have a running version of Vivado. This project was created using the 20
 * [Rana Taher](https://github.com/rana5679)
 
 ## License
-Copyright 2024 Yasmina Mahdy
-Copyright 2024 Haya Shalaby
-Copyright 2024 Rana Taher
+Copyright 2024 Yasmina Mahdy  
+Copyright 2024 Haya Shalaby  
+Copyright 2024 Rana Taher  
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
