@@ -3,6 +3,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 
 set_property PACKAGE_PIN R2 [get_ports rst]
 set_property IOSTANDARD LVCMOS33 [get_ports rst]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets rst_IBUF]
 
 set_property PACKAGE_PIN T18 [get_ports U]
 set_property IOSTANDARD LVCMOS33 [get_ports U]
